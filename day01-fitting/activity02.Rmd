@@ -6,3 +6,25 @@ output: github_document
 ```{r global-options, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+##Simple linear model
+```{r exploring data}
+plot(income.data$income,income.data$happiness,xlab='income',ylab='happiness level',main='happiness given income')
+```
+
+```{r}
+# Created a parsnip specification for a linear model
+
+lm_spec <- linear_reg() %>%
+  set_mode("regression") %>%
+  set_engine("lm")
+
+# Fit our specification to our data
+
+slr_mod <- lm_spec %>% 
+fit(happiness~ income, data = income.data)
+
+# View our model output
+tidy(slr_mod)
+```
+
