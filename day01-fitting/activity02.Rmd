@@ -7,9 +7,18 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-##Simple linear model
+##Simple linear regression model
 ```{r exploring data}
-plot(income.data$income,income.data$happiness,xlab='income',ylab='happiness level',main='happiness given income')
+plot(income.data$income,income.data$happiness,xlab='income index',ylab='happiness index',main='happiness given income')
+```
+
+```{r}
+
+```
+
+```{r}
+library(tidyverse)
+library(tidymodels)
 ```
 
 ```{r}
@@ -18,12 +27,16 @@ plot(income.data$income,income.data$happiness,xlab='income',ylab='happiness leve
 lm_spec <- linear_reg() %>%
   set_mode("regression") %>%
   set_engine("lm")
+```
 
+```{r}
 # Fit our specification to our data
 
 slr_mod <- lm_spec %>% 
 fit(happiness~ income, data = income.data)
+```
 
+```{r}
 # View our model output
 tidy(slr_mod)
 ```
