@@ -41,3 +41,47 @@ fit(happiness~ income, data = income.data)
 tidy(slr_mod)
 ```
 
+## Assessing slr Model
+```{r}
+library(tidymodels)
+# diamonds dataset from {ggplot2} (loaded with {tidymodels})
+diamonds
+```
+
+```{r}
+# set seed before random split
+set.seed(1)
+# put 80% of the data into the training set
+diamonds_split <- initial_split(diamonds, prop = 0.80)
+
+# assign the two splits to data frames - with descriptive names
+diamonds_train <- training(diamonds_split)
+diamonds_test <- testing(diamonds_split)
+
+# splits
+diamonds_train
+```
+
+```{r}
+diamonds_test
+```
+
+```{r creating  model specifications to obtain the best least squares residuals}
+lm_spec <- linear_reg() %>%
+  set_mode("regression") %>%
+  set_engine("lm")
+```
+
+```{r fitting the model to obtain coeficients and model residuals}
+slr_fit <- lm_spec %>% 
+fit(price~ carat, data = diamonds_train)
+```
+
+```{r}
+tidy(slr_fit)
+```
+
+```{r}
+glance(slr_fit)
+```
+
