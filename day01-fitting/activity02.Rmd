@@ -43,7 +43,7 @@ tidy(slr_mod)
 
 ## Assessing slr Model
 ```{r}
-library(tidymodels)
+#library(tidymodels)
 # diamonds dataset from {ggplot2} (loaded with {tidymodels})
 diamonds
 ```
@@ -83,5 +83,15 @@ tidy(slr_fit)
 
 ```{r}
 glance(slr_fit)
+```
+
+```{r predicting}
+#.pred is the predicted column
+slr_aug <- augment(slr_fit, new_data = diamonds_test)
+slr_aug
+```
+
+```{r}
+predict(slr_fit, new_data = diamonds_test)
 ```
 
